@@ -15,6 +15,17 @@ module.exports = function (sequelize, DataTypes) {
                 len: [1]
             }
         }
+
     });
+    User.associate = function(models) {
+        // Associating User with username/pass
+        // When a User is deleted, also delete any associated info
+        User.hasMany(models.Interests, {
+          onDelete: "cascade"
+        });
+        User.hasMany(models.History, {
+            onDelete: "cascade"
+          });
+      };
     return User;
 };

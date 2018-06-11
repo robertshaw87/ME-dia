@@ -16,5 +16,15 @@ module.exports = function (sequelize, DataTypes) {
             }
         }
     });
+
+    History.associate = function(models) {
+        // We're saying that History should belong to a user
+        // A History can't be created without a user due to the foreign key constraint
+        History.belongsTo(models.User, {
+          foreignKey: {
+            allowNull: false
+          }
+        });
+      };
     return History;
 };

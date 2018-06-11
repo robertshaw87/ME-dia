@@ -16,5 +16,15 @@ module.exports = function (sequelize, DataTypes) {
             }
         }
     });
+
+    Interests.associate = function(models) {
+        // We're saying that a Interest should belong to a User
+        // An Interesr can't be created without a user due to the foreign key constraint
+        Interests.belongsTo(models.User, {
+          foreignKey: {
+            allowNull: false
+          }
+        });
+      };
     return Interests;
 };
