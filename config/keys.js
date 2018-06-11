@@ -1,5 +1,6 @@
 var keys = module.exports = {};
 
-keys.googleAuth = {
+keys.googleOAuth = {
     clientID: process.env.GOOGLE_OAUTH_KEY,
+    clientSecret: process.env.GOOGLE_OAUTH_SECRET
 }
