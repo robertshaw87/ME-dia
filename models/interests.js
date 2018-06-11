@@ -1,6 +1,6 @@
 module.exports = function (sequelize, DataTypes) {
     var Interests = sequelize.define("Interests", {
-        category: {
+        genre: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
@@ -8,13 +8,14 @@ module.exports = function (sequelize, DataTypes) {
             }
         },
 
-        views: {
+        counts: {
             type: DataTypes.INTEGER,
             allowNull: false,
             validate: {
                 min: 0
             }
-        }
+        },
+    
     });
 
     Interests.associate = function(models) {
