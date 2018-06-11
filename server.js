@@ -1,5 +1,9 @@
 var express = require("express");
 var bodyParser = require("body-parser");
+var passport = require('passport');
+var auth = require('./auth');
+var cookieParser = require('cookie-parser');
+var cookieSession = require('cookie-session');
 
 require("dotenv").config();
 var keys = require("./config/keys.js");
