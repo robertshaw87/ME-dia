@@ -1,5 +1,5 @@
 module.exports = function (sequelize, DataTypes) {
-    var User = sequelize.define("User", {
+    var History = sequelize.define("History", {
         name: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -8,7 +8,7 @@ module.exports = function (sequelize, DataTypes) {
             }
         },
 
-        password: {
+        genre: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
@@ -16,5 +16,5 @@ module.exports = function (sequelize, DataTypes) {
             }
         }
     });
-    return User;
+    return History;
 };

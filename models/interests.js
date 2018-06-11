@@ -1,6 +1,6 @@
 module.exports = function (sequelize, DataTypes) {
-    var User = sequelize.define("User", {
-        name: {
+    var Interests = sequelize.define("Interests", {
+        category: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
@@ -8,13 +8,13 @@ module.exports = function (sequelize, DataTypes) {
             }
         },
 
-        password: {
-            type: DataTypes.STRING,
+        views: {
+            type: DataTypes.INTEGER,
             allowNull: false,
             validate: {
-                len: [1]
+                min: 0
             }
         }
     });
-    return User;
+    return Interests;
 };
