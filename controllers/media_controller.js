@@ -15,4 +15,25 @@ router.get("/recommendations", function (req, res) {
         res.render("recommendations");
     });
 
+//========================
+//SARA'S USER INPUT ROUTE
+//========================
+
+
+
+
+
+//------------------------
+//========================
+//ROBERT'S RECOMMENDATION ROUTE
+//========================
+
+
+
+
+
+
+
+//-------------------------
+
 module.exports = router;
