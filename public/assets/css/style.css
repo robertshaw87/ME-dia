@@ -1,0 +1,24 @@
+.logo {
+    height: 30px;
+}
+
+.main-logo {
+    display: block;
+    -webkit-filter: drop-shadow(1px 1px 4px #222);
+    filter: drop-shadow(1px 1px 4px #222);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 800px;
+    height: 800px;
+    margin-top: -400px;
+    /* Half the height */
+    margin-left: -400px;
+}
+
+.jumbotron {
+    width: 100%;
+    background-image: url("https://assets.nflxext.com/ffe/siteui/vlv3/bbce74cc-898c-4b30-8ac5-e8eb060f76d9/9bd21174-69f6-45a4-b1b3-7e56b83537bc/US-en-20180604-popsignuptwoweeks-perspective_alpha_website_large.jpg");
+    background-position: center;
+    height: 100vh;
+}
