@@ -1,3 +1,2 @@
 DROP DATABASE IF EXISTS media_db;
 CREATE DATABASE media_db;
-USE media_db;
