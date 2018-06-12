@@ -11,10 +11,6 @@ router.get("/login", function (req, res) {
         res.render("login");
     });
 
-router.get("/recommendations", function (req, res) {
-        res.render("recommendations");
-    });
-
 //========================
 //SARA'S USER INPUT ROUTE
 //========================
@@ -28,11 +24,28 @@ router.get("/recommendations", function (req, res) {
 //ROBERT'S RECOMMENDATION ROUTE
 //========================
 
+router.get("/recommendations/:userid", function (req, res) {
+    db.Interests.findAll({
+        where: {UserId: parseInt(req.params.userid)},
+        order: [
+            ["counts", "DESC"]
+        ]
+    }).then(function(data) {
+        // console.log(data);
+        var searchParams = [];
+        for (var i = 0; i < 2 && i < data.length; i++){
+            searchParams[i] = data[i].genre;
+        }
+        console.log(searchParams);
+    });
 
 
 
 
 
+
+    res.render("recommendations");
+});
 
 //-------------------------
 
