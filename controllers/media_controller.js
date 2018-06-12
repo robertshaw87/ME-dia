@@ -1,6 +1,8 @@
 var db = require("../models");
 var express = require("express");
 var router = express.Router();
+var request = require('request');
+var keys = require("../config/keys.js")
 
 router.get("/", function (req, res) {
         // console.log("index");
@@ -24,7 +26,7 @@ router.get("/login", function (req, res) {
 //ROBERT'S RECOMMENDATION ROUTE
 //========================
 
-router.get("/recommendations/:userid", function (req, res) {
+router.get("api/users/:userid/recommendations", function (req, res) {
     db.Interests.findAll({
         where: {UserId: parseInt(req.params.userid)},
         order: [
@@ -37,6 +39,7 @@ router.get("/recommendations/:userid", function (req, res) {
             searchParams[i] = data[i].genre;
         }
         console.log(searchParams);
+        
     });
 
 
