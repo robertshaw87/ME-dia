@@ -4,16 +4,14 @@
 
 .main-logo {
     display: block;
-/*    -webkit-filter: drop-shadow(1px 1px 1px #222);
-    filter: drop-shadow(1px 1px 1px #222);*/
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 800px;
-    height: 800px;
-    margin-top: -400px;
+    width: 600px;
+    height: 600px;
+    margin-top: -300px;
     /* Half the height */
-    margin-left: -400px;
+    margin-left: -300px;
 }
 
 .jumbotron {
@@ -21,4 +19,12 @@
     background-image: url("../imgs/test-background.png");
     background-position: center;
     height: 100vh;
+    display: flex;
+	align-items: flex-end;
+}
+
+.down-arrow {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
 }
