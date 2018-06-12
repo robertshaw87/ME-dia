@@ -18,6 +18,12 @@ router.get("/login", function (req, res) {
 //SARA'S USER INPUT ROUTE
 //========================
 
+//get info from the form
+router.get("/addmedia", function (req, res){
+    res.render("userForm");
+})
+
+//create/post the user history in to history table
 router.post("/api/users/:userid/history", function(req,res){
     var history = req.body;
     var userid = parseInt(req.params.userid);
@@ -30,7 +36,7 @@ router.post("/api/users/:userid/history", function(req,res){
         res.json(data);
     });
 });
-
+//updating the interest table
 router.put("/api/users/:userid/interests", function(req,res){
  var interests = req.body;
  var userid = req.params.userid;
@@ -45,6 +51,7 @@ console.log(interests.genre);
  });
 
 });
+
 
 
 
