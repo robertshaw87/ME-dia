@@ -15,7 +15,33 @@ router.get("/login", function (req, res) {
 //SARA'S USER INPUT ROUTE
 //========================
 
+router.post("/api/users/:userid/history", function(req,res){
+    var history = req.body;
+    var userid = parseInt(req.params.userid);
 
+    db.History.create({
+        UserId: userid,
+        name: history.name,
+        type: history.type
+    }).then(function(data){
+        res.json(data);
+    });
+});
+
+router.put("/api/users/:userid/interests", function(req,res){
+ var interests = req.body;
+ var userid = req.params.userid;
+console.log(interests.genre);
+ db.Interests.update({counts: db.sequelize.literal('counts + 1')}, {
+    where: {
+        UserId: userid,
+        genre: interests.genre
+    }
+ }).then(function(data){
+    res.json(data);
+ });
+
+});
 
 
 
