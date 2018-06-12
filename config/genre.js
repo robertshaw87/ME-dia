@@ -1,6 +1,6 @@
 var genre = module.exports = {};
 
-genre.tmdb = {
+genre.TMDB = {
     Action:28,
     Adventure:12,
     Animation:16,
