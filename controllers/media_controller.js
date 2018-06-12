@@ -68,7 +68,7 @@ router.get("/api/users/:userid/recommendations", function (req, res) {
         recommendMovie(searchParams, [], res, parseInt(req.params.userid))
         
     });
-    res.render("recommendations");
+    // res.render("recommendations");
 });
 
 // return a random integer between 0 and the argument (non-inclusive)
@@ -86,6 +86,11 @@ function recommendTV(searchParams, resultsArray, res, userID) {
 
 function recommendBook(searchParams, resultsArray, res, userID) {
     console.log(resultsArray);
+    // finishRequest(searchParams, resultsArray, res, userID);
+}
+
+function finishRequest(searchParams, resultsArray, res, userID) {
+    // res.json(resultsArray);
 }
 
 // make calls to get movies or tv shows and then add to resultsArray
@@ -104,7 +109,7 @@ function callTMDB(type, searchParams, resultsArray, res, userID, callback) {
                 var currItem = itemList.splice(randInt(itemList.length), 1)[0];
                 var date = (type === "movie" ? currItem.release_date : currItem.first_air_date)
                 var name = (type === "movie" ? currItem.title : currItem.name)
-                console.log(date)
+                // console.log(date)
                 if (name && currItem.overview && date && currItem.poster_path) {
                     var newMovie = {
                         name: name,
