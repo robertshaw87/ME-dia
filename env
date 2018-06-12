@@ -1,0 +1,8 @@
+# Google OAUTH
+
+GOOGLE_OAUTH_CLIENTID=648467354227-47sbakbbl6rj6k1e4fi5qmcnles1skiu.apps.googleusercontent.com
+GOOGLE_OAUTH_SECRET=DuZ1FMKPjmepilwsnO7Mo5SD
+
+# The Movie DB
+
+TMDB_APIKEY=1f9f8ca21801bd482d014a7445310f72
