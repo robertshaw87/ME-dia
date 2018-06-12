@@ -38,7 +38,25 @@ $(document).ready(function () {
             genreSelected.push($(this).val())
             
         })
-        console.log(genreSelected);
+
+
+        $.post("/api/users/1/history", history, function(data){
+            //console.log(data);
+        })
+        // console.log(genreSelected);
+        // console.log(history);
+        for (i = 0; i< genreSelected.length;i++){
+            var genre = {
+                genre: genreSelected[i]
+            }
+            $.ajax("/api/users/1/interests",{
+                type: "PUT",
+                data: genre
+            }).then(function(res){
+                console.log(res);
+            })
+        }
+        
     });
 });
 
