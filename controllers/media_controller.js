@@ -54,7 +54,6 @@ console.log(interests.genre);
 //========================
 
 router.get("/api/users/:userid/recommendations", function (req, res) {
-    console.log("banananananan")
     db.Interests.findAll({
         where: {UserId: parseInt(req.params.userid)},
         order: [
@@ -68,7 +67,6 @@ router.get("/api/users/:userid/recommendations", function (req, res) {
         recommendMovie(searchParams, [], res, parseInt(req.params.userid))
         
     });
-    // res.render("recommendations");
 });
 
 // return a random integer between 0 and the argument (non-inclusive)
@@ -86,16 +84,20 @@ function recommendTV(searchParams, resultsArray, res, userID) {
 
 function recommendBook(searchParams, resultsArray, res, userID) {
     console.log(resultsArray);
-    // finishRequest(searchParams, resultsArray, res, userID);
+    finishRequest(searchParams, resultsArray, res, userID);
 }
 
 function finishRequest(searchParams, resultsArray, res, userID) {
-    // res.json(resultsArray);
+    res.render("recommendations", {
+        recommendations: resultsArray,
+        userID: userID,
+        userName: "Banana"
+    });
 }
 
 // make calls to get movies or tv shows and then add to resultsArray
 // executes callback function afterwards
-function callTMDB(type, searchParams, resultsArray, res, userID, callback) {
+function callTMDB(type, searchParams, resultsArray, apiResponse, userID, callback) {
     var queryStr = `?api_key=${keys.TMDB.apikey}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=`
     queryStr += genreTable.TMDB[searchParams[0]];
     for (var i=1; i<searchParams.length; i++){
@@ -109,20 +111,19 @@ function callTMDB(type, searchParams, resultsArray, res, userID, callback) {
                 var currItem = itemList.splice(randInt(itemList.length), 1)[0];
                 var date = (type === "movie" ? currItem.release_date : currItem.first_air_date)
                 var name = (type === "movie" ? currItem.title : currItem.name)
-                // console.log(date)
                 if (name && currItem.overview && date && currItem.poster_path) {
                     var newMovie = {
                         name: name,
                         plot: currItem.overview,
                         date: date,
-                        image: "https://image.tmdb.org/t/p/original/" + currItem.poster_path
+                        image: "https://image.tmdb.org/t/p/original" + currItem.poster_path
                     }
                     resultsArray.push(newMovie);
                 } else {
                     i--;
                 }
             }
-            callback(searchParams, resultsArray, res, userID);
+            callback(searchParams, resultsArray, apiResponse, userID);
         }
     })
 }
