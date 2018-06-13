@@ -15,30 +15,40 @@ const numGenres = 2;
 //number of results for each genre from movie/tv api
 const numRec = 3;
 
-    router.get("/", function (req, res) {
-        // console.log("index");
-        res.render("index");
-    });
+router.get("/", function (req, res) {
+    if (req.user) {
+        console.log(req.user)
+    //   res.redirect("/members");
+    } 
+    // console.log("index");
+    res.render("index");
+});
 
 router.get("/login", function (req, res) {
+    if (req.user) {
+        console.log(req.user)
+    //   res.redirect("/members");
+    } 
     res.render("login");
 });
 
-router.get("/", function(req, res) {
-    // If the user already has an account send them to the members page
-    if (req.user) {
-      res.redirect("/members");
-    }
-    res.sendFile(path.join(__dirname, "../public/signup.html"));
-  });
-//
-  router.get("/login", function(req, res) {
-    // If the user already has an account send them to the members page
-    if (req.user) {
-      res.redirect("/members");
-    }
-    res.sendFile(path.join(__dirname, "../public/login.html"));
-  });
+// router.get("/", function(req, res) {
+//     // If the user already has an account send them to the members page
+//     if (req.user) {
+//         console.log(req.user)
+//     //   res.redirect("/members");
+//     }
+//     res.sendFile(path.join(__dirname, "../public/signup.html"));
+//   });
+// //
+//   router.get("/login", function(req, res) {
+//     // If the user already has an account send them to the members page
+//     if (req.user) {
+//         console.log(req.user)
+//     //   res.redirect("/members");
+//     }
+//     res.sendFile(path.join(__dirname, "../public/login.html"));
+//   });
 
   // Here we've add our isAuthenticated middleware to this route.
   // If a user who is not logged in tries to access this route they will be 
@@ -122,12 +132,14 @@ router.get("/logout", function (req, res) {
 //========================
 
 router.get("/recommendations/:userid", function (req, res) {
+    
     db.Interests.findAll({
         where: { UserId: parseInt(req.params.userid) },
         order: [
             ["counts", "DESC"]
         ]
     }).then(function (data) {
+        
         var searchParams = [];
         for (var i = 0; i < numGenres && i < data.length; i++){
             searchParams[i] = data[i].genre;
@@ -143,6 +155,7 @@ function randInt(x) {
 }
 
 function recommendMovie(searchParams, resultsArray, iterator, res, userID) {
+    console.log(iterator)
     if (iterator >= searchParams.length)
         recommendTV(searchParams, resultsArray, 0, res, userID)
     else {
@@ -175,6 +188,8 @@ function callTMDB(type, searchParams, resultsArray, iterator, apiResponse, userI
     var queryStr = `?api_key=${keys.TMDB.apikey}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=`
     queryStr += genreTable.TMDB[searchParams[iterator]];
     request("https://api.themoviedb.org/3/discover/" + type + queryStr, function (err, res, body){   
+    console.log(res.statusCode)
+    console.log(err)
     if (!err && res.statusCode === 200){
             var itemList = JSON.parse(body).results;
             for (var i = 0; i < numRec && 0 < itemList.length; i++) {
