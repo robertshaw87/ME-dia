@@ -1,21 +1,24 @@
 {{> navbar}}
 
-	<div class = "row justify-content-center my-4">
+	<div class = "row justify-content-center text-center my-4">
 		<div class="col-12 col-md-10">
-		<h1 class="text-center">Hello {{userName}}!</h1>
-		<h3 class="text-center">Here are some recommendations based on your history...</h3>
+		<h1>Hello {{userName}}!</h1>
+		<h3>Here are some recommendations based on your history...</h3>
+		<h6 class="text-muted">Click on a poster to view more information about the movie or tv show!</h6>
+
+		<a href="/addmedia" class="user-links">Add to My History</a>
 		</div>
 	</div>
 
 		<div class="owl-carousel owl-theme text-center">
 			{{#each recommendations}}
-			<div> <img src="{{image}}" class="recommended-media" data-img="{{image}} "data-plot="{{plot}}" data-name="{{name}}" data-date="{{date}}"> </div>	
+			<div><a href="#select-rec"><img src="{{image}}" class="recommended-media" data-img="{{image}} "data-plot="{{plot}}" data-name="{{name}}" data-date="{{date}}"></a></div>	
 			{{/each}}
 		</div>
 
-<div class="container">
-	<div id="select-rec">
+	<div class="container mt-5">
+		<div id="select-rec">
+		</div>
 	</div>
-</div>
 
 
