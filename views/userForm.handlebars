@@ -9,13 +9,15 @@
 </div>
 
 <div class="container">
+
+{{!-- INPUT FORM --}}
 <div class="row justify-content-center add-form">
     <div class="col-12">
 
         <span class="input input--isao">
-        <input class="input__field input__field--isao" type="text" id="media-name" />
+        <input class="input__field input__field--isao" type="text" id="media-name" placeholder="Enter the name of a movie or TV show" onfocus="this.placeholder = ''"onblur="this.placeholder = 'Enter the name of a movie or TV show'"/>
         <label class="input__label input__label--isao" data-content="title">
-        <span class="input__label-content input__label-content--isao">Enter the name of a movie or TV show</span>
+        <span class="input__label-content input__label-content--isao">Title</span>
         </label>
         </span>
 
@@ -30,12 +32,14 @@
                 <option>Tv Show</option>
             </select>
         </div>
-        <div class="col-12 col-md-8" id="genre-choices">
+        <div class="col-12 col-md-8 genre-choices">
         <p class="text-left">Select all applicable genres</p>
 
         </div>
-
     </div>
+{{!-- INPUT FORM --}}
+
+
     <div class="row justify-content-end mt-5">
     <div class=" text-center col-md-2">
       <button id="submit" type="submit" class="btn">Add Media</button>
