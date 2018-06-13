@@ -1,5 +1,31 @@
+html,
+body {
+    background-color: #343434;
+    color: #fff;
+}
+
 .logo {
     height: 30px;
+}
+
+a {
+    color: #2bbc82;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #cec591;
+    text-decoration: none;
+
+}
+
+.btn {
+    background-color: #26bc82;
+    color: #fff;
+}
+
+.btn:hover {
+    background-color: #cec591;
 }
 
 .main-logo {
