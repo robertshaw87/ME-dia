@@ -1,35 +1,39 @@
 {{> navbar}}
 
-<div class = "container my-5">
-{{!-- <div class="row justify-content-lg-center">
-	<div class="col-12 col-md-7">
-		<img class="img-fluid" src="/assets/imgs/login-characters.png">
-	</div>
-</div> --}}
-<div class="row justify-content-center">
+<div class="container my-5">
+	{{!--
+	<div class="row justify-content-lg-center">
+		<div class="col-12 col-md-7">
+			<img class="img-fluid" src="/assets/imgs/login-characters.png">
+		</div>
+	</div> --}}
+	<div class="row justify-content-center">
 		<div class="col-12 col-md-6">
-		<img class="img-fluid" src="/assets/imgs/login-characters.png">
+			<img class="img-fluid" src="/assets/imgs/login-characters.png">
+		</div>
+		<div class="col-12 col-md-6">
+			<h1>Entertainment recommndations tailored to everything you watch.</h1>
+			<br>
+			<form>
+				<div class="form-group">
+					<label for="username">
+						<i class="fas fa-user"></i> Username</label>
+					<input type="text" class="form-control" id="username" aria-describedby="emailHelp" placeholder="Enter your username" onfocus="this.placeholder = ''"
+					 onblur="this.placeholder = 'Enter your username'">
+					<small id="usernameHelp" class="form-text text-muted"></small>
+				</div>
+				<div class="form-group">
+					<label for="password">
+						<i class="fas fa-key"></i> Password</label>
+					<input type="password" class="form-control" id="password" placeholder="Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'">
+				</div>
+				<div class="text-right">
+					<button id="login-btn" class="btn">
+						<i class="fas fa-sign-in-alt"></i> Login</button>
+					<button id="signup-btn" class="btn">
+						<i class="fas fa-user-plus"></i> Sign Up</button>
+				</div>
+			</form>
+		</div>
 	</div>
-	<div class="col-12 col-md-6">
-		<h1>Entertainment recommndations tailored to everything you watch.</h1>
-		<br>
-	<form>
-	  <div class="form-group">
-	    <label for="email"><i class="fas fa-user"></i> Username</label>
-	    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" onfocus="this.placeholder = ''"
-	onblur="this.placeholder = 'Enter your username'">
-	    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-	  </div>
-	  <div class="form-group">
-	    <label for="password"><i class="fas fa-key"></i> Password</label>
-	    <input type="password" class="form-control" id="password" placeholder="Password" onfocus="this.placeholder = ''"
-	onblur="this.placeholder = 'Password'">
-	  </div>
-	  <div class="text-right">
-	  <a id="login-btn" class="btn" href="/recommendations/1"><i class="fas fa-sign-in-alt"></i> Login</a>
-	  <a id="signup-btn" class="btn" href="/addmedia"><i class="fas fa-user-plus"></i> Sign Up</a>
-	</div>
-	</form>
-	</div>
-</div>
 </div>

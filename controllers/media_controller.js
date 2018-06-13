@@ -16,46 +16,18 @@ const numGenres = 2;
 const numRec = 3;
 
 router.get("/", function (req, res) {
-    if (req.user) {
-        console.log(req.user)
-    //   res.redirect("/members");
-    } 
-    // console.log("index");
+    
     res.render("index");
 });
 
 router.get("/login", function (req, res) {
     if (req.user) {
-        console.log(req.user)
-    //   res.redirect("/members");
-    } 
-    res.render("login");
+        res.render("recommendations")
+    } else {
+        res.render("login");
+    }
 });
 
-// router.get("/", function(req, res) {
-//     // If the user already has an account send them to the members page
-//     if (req.user) {
-//         console.log(req.user)
-//     //   res.redirect("/members");
-//     }
-//     res.sendFile(path.join(__dirname, "../public/signup.html"));
-//   });
-// //
-//   router.get("/login", function(req, res) {
-//     // If the user already has an account send them to the members page
-//     if (req.user) {
-//         console.log(req.user)
-//     //   res.redirect("/members");
-//     }
-//     res.sendFile(path.join(__dirname, "../public/login.html"));
-//   });
-
-  // Here we've add our isAuthenticated middleware to this route.
-  // If a user who is not logged in tries to access this route they will be 
-  //redirected to the signup page
-  router.get("/members", isAuthenticated, function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/members.html"));
-  });
 //========================
 //SARA'S USER INPUT ROUTE
 //========================
@@ -66,9 +38,9 @@ router.get("/addmedia", function (req, res) {
 })
 
 //create/post the user history in to history table
-router.post("/api/users/:userid/history", function (req, res) {
+router.post("/api/users/history", function (req, res) {
     var history = req.body;
-    var userid = parseInt(req.params.userid);
+    var userid = req.user.id;
 
     db.History.create({
         UserId: userid,
@@ -79,9 +51,9 @@ router.post("/api/users/:userid/history", function (req, res) {
     });
 });
 //updating the interest table
-router.put("/api/users/:userid/interests", function (req, res) {
+router.put("/api/users/interests", function (req, res) {
     var interests = req.body;
-    var userid = req.params.userid;
+    var userid = req.user.id;
     console.log(interests.genre);
     db.Interests.update({ counts: db.sequelize.literal('counts + 1') }, {
         where: {
@@ -93,30 +65,36 @@ router.put("/api/users/:userid/interests", function (req, res) {
     });
 
 });
-// Using the passport.authenticate middleware with our local strategy.
-// If the user has valid login credentials, send them to the members page.
-// Otherwise the user will be sent an error
+
+
 router.post("/api/login", passport.authenticate("local"), function (req, res) {
-    // Since we're doing a POST with javascript, we can't actually redirect that post into a GET request
-    // So we're sending the user back the route to the members page because the redirect will happen on the front end
-    // They won't get this or even be able to access this page if they aren't authed
-    res.json("/members");
+
+    res.json("/recommendations");
 });
-// Route for signing up a user. The user's password is automatically hashed and stored securely thanks to
-// how we configured our Sequelize User Model. If the user is created successfully, proceed to log the user in,
-// otherwise send back an error
+
 router.post("/api/signup", function (req, res) {
-    console.log(req.body);
     db.User.create({
-        email: req.body.email,
+        name: req.body.name,
         password: req.body.password
     }).then(function () {
-        res.redirect(307, "/api/login");
+        res.redirect(307, "/api/newuser");
     }).catch(function (err) {
         console.log(err);
         res.json(err);
         // res.status(422).json(err.errors[0].message);
     });
+});
+router.post("/api/newuser", passport.authenticate("local"), function (req, res) {
+    var userid = req.user.id;
+    var genreList = Object.keys(genreTable.TMDB);
+    genreList.forEach(elem => {
+        db.Interests.create({
+            UserId: userid,
+            genre: elem,
+            count: 0            
+        })
+    })
+    res.json("/addmedia");
 });
 //
 // Route for logging user out
@@ -131,20 +109,20 @@ router.get("/logout", function (req, res) {
 //ROBERT'S RECOMMENDATION ROUTE
 //========================
 
-router.get("/recommendations/:userid", function (req, res) {
-    
+router.get("/recommendations", function (req, res) {
+
     db.Interests.findAll({
-        where: { UserId: parseInt(req.params.userid) },
+        where: { "UserId": req.user.id },
         order: [
             ["counts", "DESC"]
         ]
     }).then(function (data) {
-        
+
         var searchParams = [];
-        for (var i = 0; i < numGenres && i < data.length; i++){
+        for (var i = 0; i < numGenres && i < data.length; i++) {
             searchParams[i] = data[i].genre;
         }
-        recommendMovie(searchParams, [], 0, res, parseInt(req.params.userid))
+        recommendMovie(searchParams, [], 0, res, req.user.id)
 
     });
 });
@@ -172,7 +150,7 @@ function recommendTV(searchParams, resultsArray, iterator, res, userID) {
 }
 
 function finishRequest(searchParams, resultsArray, res, userID) {
-    db.User.findAll({where: {id: userID}}).then(function (data) {
+    db.User.findAll({ where: { id: userID } }).then(function (data) {
         res.render("recommendations", {
             recommendations: resultsArray,
             userID: data.name,
@@ -186,10 +164,9 @@ function finishRequest(searchParams, resultsArray, res, userID) {
 function callTMDB(type, searchParams, resultsArray, iterator, apiResponse, userID, callback) {
     var queryStr = `?api_key=${keys.TMDB.apikey}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=`
     queryStr += genreTable.TMDB[searchParams[iterator]];
-    request("https://api.themoviedb.org/3/discover/" + type + queryStr, function (err, res, body){   
-    console.log(res.statusCode)
-    console.log(err)
-    if (!err && res.statusCode === 200){
+    request("https://api.themoviedb.org/3/discover/" + type + queryStr, function (err, res, body) {
+
+        if (!err && res.statusCode === 200) {
             var itemList = JSON.parse(body).results;
             for (var i = 0; i < numRec && 0 < itemList.length; i++) {
                 var currItem = itemList.splice(randInt(itemList.length), 1)[0];
@@ -198,12 +175,12 @@ function callTMDB(type, searchParams, resultsArray, iterator, apiResponse, userI
                 var itemGenres = [];
                 currItem.genre_ids.forEach((elem) => {
                     var elemGenre = genreTable.reverseTMDB[elem]
-                    if (elemGenre){
+                    if (elemGenre) {
                         if (typeof elemGenre === "string")
                             itemGenres.push(elemGenre);
                         else {
                             elemGenre.forEach(subGenre => {
-                                if(!itemGenres.includes(subGenre))
+                                if (!itemGenres.includes(subGenre))
                                     itemGenres.push(subGenre);
                             })
                         }
