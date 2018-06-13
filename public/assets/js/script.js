@@ -1,24 +1,29 @@
-$(document).ready(function () {
-    $('.owl-carousel').owlCarousel({
+$(document).ready(function() {
+    var owl = $('.owl-carousel');
+    owl.owlCarousel({
+        autoplay:true,
+        autoplayTimeout:1000,
+        autoplayHoverPause:true,
+        center: true,
         loop: true,
+        dotsEach: true,
         margin: 10,
-        responsiveClass: true,
         responsive: {
             0: {
-                items: 1,
-                nav: true
+                items: 1
             },
             600: {
-                items: 3,
-                nav: false
+                items: 2
             },
-            1000: {
-                items: 5,
-                nav: true,
-                loop: false
+            960: {
+                items: 3
+            },
+            1200: {
+                items: 5
             }
         }
-    })
+    });
+
     var genres = ["Action", "Adventure", "Animation", "Comedy", "Crime", "Documentary", "Drama", "Family", "Fantasy", "History", "Horror", "Music", "Mystery", "Romance", "Science Fiction", "Thriller", "War", "Western"]
 
     for (i = 0; i < genres.length; i++) {
@@ -27,36 +32,49 @@ $(document).ready(function () {
         <label class="form-check-label" for="inlineCheckbox1">${genres[i]}</label>
     </div>`)
     }
-    $("#submit").on("click", function (event) {
+    $("#submit").on("click", function(event) {
         event.preventDefault();
         var history = {
             name: $("#media-name").val().trim(),
             type: $("#media-type").val().trim()
         }
         var genreSelected = [];
-        $(".form-check-input:checked").each(function (){
+        $(".form-check-input:checked").each(function() {
             genreSelected.push($(this).val())
-            
+
         })
 
 
-        $.post("/api/users/1/history", history, function(data){
+        $.post("/api/users/1/history", history, function(data) {
             //console.log(data);
         })
         // console.log(genreSelected);
         // console.log(history);
-        for (i = 0; i< genreSelected.length;i++){
+        for (i = 0; i < genreSelected.length; i++) {
             var genre = {
                 genre: genreSelected[i]
             }
-            $.ajax("/api/users/1/interests",{
+            $.ajax("/api/users/1/interests", {
                 type: "PUT",
                 data: genre
-            }).then(function(res){
+            }).then(function(res) {
                 console.log(res);
             })
         }
-        
-    });
-});
 
+    });
+
+    $(document).on("click", ".recommended-media", function(){
+        $("#select-rec").html( `
+            <div class = "row no-gutters justify-content-center my-2">
+                <div class="col-12 col-md-5 text-center">
+                    <img class="poster" src="${$(this).data("img")}">
+                </div>
+                <div class="col-12 col-md-5">
+                    <h1 class="text-left">${$(this).data("name")}</h1>
+                    <h4 class="text-left">Date: ${$(this).data("date")}</h4>
+                    <p><h4>Plot:</h4> ${$(this).data("plot")}</p>
+                </div>
+            </div>`)
+    })
+});
