@@ -3,6 +3,10 @@ body {
     background-color: #343434;
     color: #fff;
 }
+.navbar{
+     filter: drop-shadow(0px 0px 2px #222);
+     opacity: 0.99;
+}
 
 .logo {
     height: 30px;
@@ -16,16 +20,26 @@ a {
 a:hover {
     color: #cec591;
     text-decoration: none;
-
 }
 
 .btn {
     background-color: #26bc82;
     color: #fff;
+    border: 0px;
 }
 
 .btn:hover {
     background-color: #cec591;
+    color: #fff;
+    border: 0px;
+}
+
+#signup-btn {
+    background-color: #199261;
+}
+
+#signup-btn:hover {
+    background-color: #5f5e6b;    
 }
 
 .main-logo {
@@ -42,22 +56,52 @@ a:hover {
 
 .jumbotron {
     width: 100%;
-    background-image: url("../imgs/test-background.png");
-    background-position: center;
+    background: url(../imgs/test-background.png) no-repeat center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
     height: 100vh;
     display: flex;
-	align-items: flex-end;
+    align-items: flex-end;
+    margin: 0px;
 }
 
 .down-arrow {
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10%;
+    z-index: 3;
 }
 
 .poster {
     height: 400px;
-/*    display: block;
-    margin-left: auto;
-    margin-right: auto;*/
+}
+
+.owl-theme .owl-dots .owl-dot span {
+    background: #2bbc82;
+}
+.owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span {
+    background: #cec591;
+}
+
+@media(max-width:750px) {
+    .main-logo {
+        width: 400px;
+        height: 400px;
+        margin-top: -200px;
+        /* Half the height */
+        margin-left: -200px;
+    }
+}
+
+@media(max-width:415px) {
+    .main-logo {
+        width: 200px;
+        height: 200px;
+        margin-top: -100px;
+        /* Half the height */
+        margin-left: -100px;
+    }
 }

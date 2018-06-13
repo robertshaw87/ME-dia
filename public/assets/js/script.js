@@ -56,7 +56,7 @@ $(document).ready(function() {
         })
 
 
-        $.post("/api/users/1/history", history, function(data) {
+        $.post("/api/users/history", history, function(data) {
             //console.log(data);
         })
         // console.log(genreSelected);
@@ -65,13 +65,14 @@ $(document).ready(function() {
             var genre = {
                 genre: genreSelected[i]
             }
-            $.ajax("/api/users/1/interests", {
+            $.ajax("/api/users/interests", {
                 type: "PUT",
                 data: genre
             }).then(function(res) {
                 console.log(res);
             })
         }
+        location.reload();
 
     });
 
@@ -88,4 +89,41 @@ $(document).ready(function() {
                 </div>
             </div>`)
     })
+    $(document).on("click", "#login-btn", function(event){
+        event.preventDefault();
+        var userData = {
+            name: $("#username").val().trim(),
+            password: $("#password").val().trim()
+        }
+        if (!userData.name || !userData.password) {
+            return;
+        }
+        $("#username").val("")
+        $("#password").val("")
+        $.post("/api/login", userData).then(function(data){
+            window.location.replace(data);
+        }).catch(function(err){
+            console.log(err)
+        })
+    })
+    $(document).on("click", "#signup-btn", function(event){
+        event.preventDefault();
+        var userData = {
+            name: $("#username").val().trim(),
+            password: $("#password").val().trim()
+        }
+        if (!userData.name || !userData.password) {
+            return;
+        }
+        $("#username").val("")
+        $("#password").val("")
+        $.post("/api/signup", userData).then(function(data){
+            window.location.replace(data);
+        }).catch(function(err){
+            console.log(err)
+            $("#usernameHelp").text("That username is taken. Please choose a new username")
+        })
+    })
+    
+
 });
