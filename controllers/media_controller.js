@@ -91,7 +91,6 @@ router.post("/api/signup", function (req, res) {
     }).catch(function (err) {
         console.log(err);
         res.json(err);
-        // res.status(422).json(err.errors[0].message);
     });
 });
 router.post("/api/newuser", passport.authenticate("local"), function (req, res) {
@@ -156,7 +155,6 @@ function randInt(x) {
 }
 
 function recommendMovie(searchParams, resultsArray, iterator, res, userID) {
-    console.log(iterator)
     if (iterator >= searchParams.length)
         recommendTV(searchParams, resultsArray, 0, res, userID)
     else {
