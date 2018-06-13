@@ -34,36 +34,46 @@ router.get("/login", function (req, res) {
 
 //get info from the form
 router.get("/addmedia", function (req, res) {
-    res.render("userForm");
+    if (req.user){
+        res.render("userForm");
+    } else
+    res.redirect("/login")
 })
 
 //create/post the user history in to history table
 router.post("/api/users/history", function (req, res) {
-    var history = req.body;
-    var userid = req.user.id;
+    if (req.user){
+        var history = req.body;
+        var userid = req.user.id;
 
-    db.History.create({
-        UserId: userid,
-        name: history.name,
-        type: history.type
-    }).then(function (data) {
-        res.json(data);
-    });
+        db.History.create({
+            UserId: userid,
+            name: history.name,
+            type: history.type
+        }).then(function (data) {
+            res.json(data);
+        });
+    } else
+    res.redirect("/login")
 });
 //updating the interest table
 router.put("/api/users/interests", function (req, res) {
-    var interests = req.body;
-    var userid = req.user.id;
-    console.log(interests.genre);
-    db.Interests.update({ counts: db.sequelize.literal('counts + 1') }, {
-        where: {
-            UserId: userid,
-            genre: interests.genre
-        }
-    }).then(function (data) {
-        res.json(data);
-    });
+    if (req.user){
 
+        var interests = req.body;
+        var userid = req.user.id;
+        console.log(interests.genre);
+        db.Interests.update({ counts: db.sequelize.literal('counts + 1') }, {
+            where: {
+                UserId: userid,
+                genre: interests.genre
+            }
+        }).then(function (data) {
+            res.json(data);
+        });
+
+    } else
+    res.redirect("/login")
 });
 
 
@@ -81,26 +91,34 @@ router.post("/api/signup", function (req, res) {
     }).catch(function (err) {
         console.log(err);
         res.json(err);
-        // res.status(422).json(err.errors[0].message);
     });
 });
 router.post("/api/newuser", passport.authenticate("local"), function (req, res) {
-    var userid = req.user.id;
-    var genreList = Object.keys(genreTable.TMDB);
-    genreList.forEach(elem => {
-        db.Interests.create({
-            UserId: userid,
-            genre: elem,
-            count: 0            
+    if (req.user){
+
+        var userid = req.user.id;
+        var genreList = Object.keys(genreTable.TMDB);
+        genreList.forEach(elem => {
+            db.Interests.create({
+                UserId: userid,
+                genre: elem,
+                count: 0            
+            })
         })
-    })
-    res.json("/addmedia");
+        res.json("/addmedia");
+    } else
+    res.redirect("/login")
 });
 //
 // Route for logging user out
 router.get("/logout", function (req, res) {
-    req.logout();
-    res.redirect("/");
+    if (req.user){
+
+        req.logout();
+        res.redirect("/");
+
+    } else
+    res.redirect("/login")
 });
 
 
@@ -110,21 +128,25 @@ router.get("/logout", function (req, res) {
 //========================
 
 router.get("/recommendations", function (req, res) {
+    if (req.user){
 
-    db.Interests.findAll({
-        where: { "UserId": req.user.id },
-        order: [
-            ["counts", "DESC"]
-        ]
-    }).then(function (data) {
+        db.Interests.findAll({
+            where: { "UserId": req.user.id },
+            order: [
+                ["counts", "DESC"]
+            ]
+        }).then(function (data) {
 
-        var searchParams = [];
-        for (var i = 0; i < numGenres && i < data.length; i++) {
-            searchParams[i] = data[i].genre;
-        }
-        recommendMovie(searchParams, [], 0, res, req.user.id)
+            var searchParams = [];
+            for (var i = 0; i < numGenres && i < data.length; i++) {
+                searchParams[i] = data[i].genre;
+            }
+            recommendMovie(searchParams, [], 0, res, req.user.id)
 
-    });
+        });
+    
+    } else
+        res.redirect("/login")
 });
 
 // return a random integer between 0 and the argument (non-inclusive)
@@ -133,7 +155,6 @@ function randInt(x) {
 }
 
 function recommendMovie(searchParams, resultsArray, iterator, res, userID) {
-    console.log(iterator)
     if (iterator >= searchParams.length)
         recommendTV(searchParams, resultsArray, 0, res, userID)
     else {
@@ -207,5 +228,13 @@ function callTMDB(type, searchParams, resultsArray, iterator, apiResponse, userI
 }
 
 //-------------------------
+
+//============================
+// View History Routes
+//============================
+
+
+
+//----------------------------
 
 module.exports = router;
