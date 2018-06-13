@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
+    $("#resubmit").hide();
+
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
@@ -10,7 +12,7 @@ $(document).ready(function() {
         });
     });
 
-    var owl = $('.owl-carousel');
+    var owl = $('.owl-carousel-movies');
     owl.owlCarousel({
         autoplay: true,
         autoplayTimeout: 3000,
@@ -31,6 +33,32 @@ $(document).ready(function() {
             },
             1200: {
                 items: 5
+            }
+        }
+    });
+
+    var owlBig = $('.owl-carousel-big');
+    owlBig.owlCarousel({
+        autoplay: true,
+        autoplayTimeout: 3000,
+        autoplayHoverPause: true,
+        center: true,
+        loop: true,
+        dotsEach: true,
+        margin: 20,
+        autoHeight: true,
+        responsive: {
+            0: {
+                items: 1
+            },
+            600: {
+                items: 1
+            },
+            960: {
+                items: 2
+            },
+            1200: {
+                items: 2
             }
         }
     });
