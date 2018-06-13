@@ -1,9 +1,20 @@
 $(document).ready(function() {
+
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+
     var owl = $('.owl-carousel');
     owl.owlCarousel({
-        autoplay:true,
-        autoplayTimeout:1000,
-        autoplayHoverPause:true,
+        autoplay: true,
+        autoplayTimeout: 3000,
+        autoplayHoverPause: true,
         center: true,
         loop: true,
         dotsEach: true,
@@ -64,8 +75,8 @@ $(document).ready(function() {
 
     });
 
-    $(document).on("click", ".recommended-media", function(){
-        $("#select-rec").html( `
+    $(document).on("click", ".recommended-media", function() {
+        $("#select-rec").html(`
             <div class = "row no-gutters justify-content-center my-2">
                 <div class="col-12 col-md-5 text-center">
                     <img class="poster" src="${$(this).data("img")}">
