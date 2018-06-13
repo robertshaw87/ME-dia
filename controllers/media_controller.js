@@ -103,7 +103,6 @@ function recommendTV(searchParams, resultsArray, iterator, res, userID) {
 }
 
 function finishRequest(searchParams, resultsArray, res, userID) {
-    // console.log(resultsArray);
     db.User.findAll({where: {id: userID}}).then(function (data) {
         res.render("recommendations", {
             recommendations: resultsArray,
@@ -127,8 +126,17 @@ function callTMDB(type, searchParams, resultsArray, iterator, apiResponse, userI
                 var name = (type === "movie" ? currItem.title : currItem.name);
                 var itemGenres = [];
                 currItem.genre_ids.forEach((elem) => {
-                    if (genreTable.reverseTMDB[elem])
-                    itemGenres.push(genreTable.reverseTMDB[elem]);
+                    var elemGenre = genreTable.reverseTMDB[elem]
+                    if (elemGenre){
+                        if (typeof elemGenre === "string")
+                            itemGenres.push(elemGenre);
+                        else {
+                            elemGenre.forEach(subGenre => {
+                                if(!itemGenres.includes(subGenre))
+                                    itemGenres.push(subGenre);
+                            })
+                        }
+                    }
                 })
                 if (name && currItem.overview && date && currItem.poster_path) {
                     var newMovie = {
