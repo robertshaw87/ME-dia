@@ -160,4 +160,12 @@ function callTMDB(type, searchParams, resultsArray, iterator, apiResponse, userI
 
 //-------------------------
 
+//============================
+// View History Routes
+//============================
+
+
+
+//----------------------------
+
 module.exports = router;
