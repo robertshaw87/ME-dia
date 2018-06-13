@@ -4,6 +4,8 @@ var router = express.Router();
 var request = require('request');
 var keys = require("../config/keys.js")
 var genreTable = require("../config/genre.js")
+//require passport
+var passport = require("../config/passport");
 
 router.get("/", function (req, res) {
         // console.log("index");
