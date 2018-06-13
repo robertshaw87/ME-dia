@@ -40,25 +40,7 @@ genre.reverseTMDB = {
     53: "Thriller",
     10752: "War",
     37: "Western",
+    10759: ["Action", "Adventure"],
+    10765: ["Science Fiction", "Fantasy"],
+    10768: "War"
 }
-
-// genre.spotify = {
-//     Action: "rock",
-//     Adventure: "travel",
-//     Animation: "pop",
-//     Comedy: "comedy",
-//     Crime: "hiphop",
-//     Documentary: "classical",
-//     Drama: "rnb",
-//     Family: "family",
-//     Fantasy: "gaming",
-//     History: "folk_americana",
-//     Horror: "metal",
-//     Music: "toplists",
-//     Mystery: "jazz",
-//     Romance: "romance",
-//     "Science Fiction": "edm_dance",
-//     Thriller: "chill",
-//     War: "metal",
-//     Western: "country"
-// }
