@@ -1,31 +1,21 @@
 {{> navbar}}
 
-
-		<div class="owl-carousel">
-		  <div> <img src="http://via.placeholder.com/350x500"> </div>
-		  <div> <img src="http://via.placeholder.com/350x500"> </div>
-		  <div> <img src="http://via.placeholder.com/350x500"> </div>
-		  <div> <img src="http://via.placeholder.com/350x500"> </div>
-		  <div> <img src="http://via.placeholder.com/350x500"> </div>
-		  <div> <img src="http://via.placeholder.com/350x500"> </div>
-		  <div> <img src="http://via.placeholder.com/350x500"> </div>
-		  <div> <img src="http://via.placeholder.com/350x500"> </div>
-		  <div> <img src="http://via.placeholder.com/350x500"> </div>
-		  <div> <img src="http://via.placeholder.com/350x500"> </div>	  
-		</div>
-
-
-<div class = "container">
-	<div class = "row justify-content-center">
+	<div class = "row justify-content-center my-4">
 		<div class="col-12 col-md-10">
-		<h1 class="text-center">Hi Username</h1>
-		<h2 class="text-center">something something something</h2>
+		<h1 class="text-center">Hello {{userName}}!</h1>
+		<h3 class="text-center">Here are some recommendations based on your history...</h3>
 		</div>
 	</div>
-	<div class = "row justify-content-center">
-		<div class="col-12 col-md-10">
-		<h1 class="text-center">AT MEDIA U CAN DO DIS</h1>
-		<h2 class="text-center">AND WE'LL GIVE U DIS WHEN U TELL US DAT</h2>
+
+		<div class="owl-carousel owl-theme text-center">
+			{{#each recommendations}}
+			<div> <img src="{{image}}" class="recommended-media" data-img="{{image}} "data-plot="{{plot}}" data-name="{{name}}" data-date="{{date}}"> </div>	
+			{{/each}}
 		</div>
-	</div>	
+
+<div class="container">
+	<div id="select-rec">
+	</div>
 </div>
+
+
