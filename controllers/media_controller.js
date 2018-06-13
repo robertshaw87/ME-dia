@@ -2,10 +2,13 @@ var db = require("../models");
 var express = require("express");
 var router = express.Router();
 var request = require('request');
-var keys = require("../config/keys.js")
-var genreTable = require("../config/genre.js")
-var SpotifyReq = require('spotify-web-api-node');
-var spotify = 
+var keys = require("../config/keys.js");
+var genreTable = require("../config/genre.js");
+
+//number of genres to grab for the user
+const numGenres = 2;
+//number of results for each genre from movie/tv api
+const numRec = 3;
 
 router.get("/", function (req, res) {
         // console.log("index");
@@ -70,7 +73,7 @@ router.get("/recommendations/:userid", function (req, res) {
         ]
     }).then(function(data) {
         var searchParams = [];
-        for (var i = 0; i < 2 && i < data.length; i++){
+        for (var i = 0; i < numGenres && i < data.length; i++){
             searchParams[i] = data[i].genre;
         }
         recommendMovie(searchParams, [], 0, res, parseInt(req.params.userid))
@@ -92,16 +95,11 @@ function recommendMovie(searchParams, resultsArray, iterator, res, userID) {
 }
 
 function recommendTV(searchParams, resultsArray, iterator, res, userID) {
-       if (iterator >= searchParams.length)
-        recommendMusic(searchParams, resultsArray, 0, res, userID)
+    if (iterator >= searchParams.length)
+        finishRequest(searchParams, resultsArray, res, userID)
     else {
         callTMDB("tv", searchParams, resultsArray, iterator, res, userID, recommendTV);
     }
-}
-
-function recommendMusic(searchParams, resultsArray, iterator, res, userID) {
-    console.log(resultsArray);
-    finishRequest(searchParams, resultsArray, res, userID);
 }
 
 function finishRequest(searchParams, resultsArray, res, userID) {
@@ -119,21 +117,34 @@ function finishRequest(searchParams, resultsArray, res, userID) {
 function callTMDB(type, searchParams, resultsArray, iterator, apiResponse, userID, callback) {
     var queryStr = `?api_key=${keys.TMDB.apikey}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=`
     queryStr += genreTable.TMDB[searchParams[iterator]];
-    console.log("https://api.themoviedb.org/3/discover/" + type + queryStr)
-    request("https://api.themoviedb.org/3/discover/" + type + queryStr, function (err, res, body){
-        if (!err && res.statusCode === 200){
+    request("https://api.themoviedb.org/3/discover/" + type + queryStr, function (err, res, body){   
+    if (!err && res.statusCode === 200){
             var itemList = JSON.parse(body).results;
-            console.log(itemList[0]);
-            for (var i = 0; i < 2 && 0 < itemList.length; i++) {
+            for (var i = 0; i < numRec && 0 < itemList.length; i++) {
                 var currItem = itemList.splice(randInt(itemList.length), 1)[0];
-                var date = (type === "movie" ? currItem.release_date : currItem.first_air_date)
-                var name = (type === "movie" ? currItem.title : currItem.name)
+                var date = (type === "movie" ? currItem.release_date : currItem.first_air_date);
+                var name = (type === "movie" ? currItem.title : currItem.name);
+                var itemGenres = [];
+                currItem.genre_ids.forEach((elem) => {
+                    var elemGenre = genreTable.reverseTMDB[elem]
+                    if (elemGenre){
+                        if (typeof elemGenre === "string")
+                            itemGenres.push(elemGenre);
+                        else {
+                            elemGenre.forEach(subGenre => {
+                                if(!itemGenres.includes(subGenre))
+                                    itemGenres.push(subGenre);
+                            })
+                        }
+                    }
+                })
                 if (name && currItem.overview && date && currItem.poster_path) {
                     var newMovie = {
                         name: name,
                         plot: currItem.overview,
                         date: date,
-
+                        type: (type === "movie" ? "Movie" : "Tv Show"),
+                        genre: itemGenres,
                         image: "https://image.tmdb.org/t/p/original" + currItem.poster_path
                     }
                     resultsArray.push(newMovie);
