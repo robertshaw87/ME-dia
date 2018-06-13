@@ -4,6 +4,8 @@ var router = express.Router();
 var request = require('request');
 var keys = require("../config/keys.js")
 var genreTable = require("../config/genre.js")
+var SpotifyReq = require('spotify-web-api-node');
+var spotify = 
 
 router.get("/", function (req, res) {
         // console.log("index");
@@ -60,7 +62,7 @@ console.log(interests.genre);
 //ROBERT'S RECOMMENDATION ROUTE
 //========================
 
-router.get("/api/users/:userid/recommendations", function (req, res) {
+router.get("/recommendations/:userid", function (req, res) {
     db.Interests.findAll({
         where: {UserId: parseInt(req.params.userid)},
         order: [
@@ -71,7 +73,7 @@ router.get("/api/users/:userid/recommendations", function (req, res) {
         for (var i = 0; i < 2 && i < data.length; i++){
             searchParams[i] = data[i].genre;
         }
-        recommendMovie(searchParams, [], res, parseInt(req.params.userid))
+        recommendMovie(searchParams, [], 0, res, parseInt(req.params.userid))
         
     });
 });
@@ -81,40 +83,48 @@ function randInt(x) {
     return Math.floor(Math.random() * x)
 }
 
-function recommendMovie(searchParams, resultsArray, res, userID) {
-    callTMDB("movie", searchParams, resultsArray, res, userID, recommendTV);
+function recommendMovie(searchParams, resultsArray, iterator, res, userID) {
+    if (iterator >= searchParams.length)
+        recommendTV(searchParams, resultsArray, 0, res, userID)
+    else {
+        callTMDB("movie", searchParams, resultsArray, iterator, res, userID, recommendMovie);
+    }
 }
 
-function recommendTV(searchParams, resultsArray, res, userID) {
-    callTMDB("tv", searchParams, resultsArray, res, userID, recommendBook);
+function recommendTV(searchParams, resultsArray, iterator, res, userID) {
+       if (iterator >= searchParams.length)
+        recommendMusic(searchParams, resultsArray, 0, res, userID)
+    else {
+        callTMDB("tv", searchParams, resultsArray, iterator, res, userID, recommendTV);
+    }
 }
 
-function recommendBook(searchParams, resultsArray, res, userID) {
+function recommendMusic(searchParams, resultsArray, iterator, res, userID) {
     console.log(resultsArray);
     finishRequest(searchParams, resultsArray, res, userID);
 }
 
 function finishRequest(searchParams, resultsArray, res, userID) {
-    res.render("recommendations", {
-        recommendations: resultsArray,
-        userID: userID,
-        userName: "Banana"
+    db.User.findAll({where: {id: userID}}).then(function (data) {
+        res.render("recommendations", {
+            recommendations: resultsArray,
+            userID: data.name,
+            userName: data[0].name
+        });
     });
 }
 
 // make calls to get movies or tv shows and then add to resultsArray
 // executes callback function afterwards
-function callTMDB(type, searchParams, resultsArray, apiResponse, userID, callback) {
+function callTMDB(type, searchParams, resultsArray, iterator, apiResponse, userID, callback) {
     var queryStr = `?api_key=${keys.TMDB.apikey}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=`
-    queryStr += genreTable.TMDB[searchParams[0]];
-    for (var i=1; i<searchParams.length; i++){
-        queryStr += "%2C" + genreTable.TMDB[searchParams[i]];
-    }
+    queryStr += genreTable.TMDB[searchParams[iterator]];
     console.log("https://api.themoviedb.org/3/discover/" + type + queryStr)
     request("https://api.themoviedb.org/3/discover/" + type + queryStr, function (err, res, body){
         if (!err && res.statusCode === 200){
             var itemList = JSON.parse(body).results;
-            for (var i = 0; i < 3 && 0 < itemList.length; i++) {
+            console.log(itemList[0]);
+            for (var i = 0; i < 2 && 0 < itemList.length; i++) {
                 var currItem = itemList.splice(randInt(itemList.length), 1)[0];
                 var date = (type === "movie" ? currItem.release_date : currItem.first_air_date)
                 var name = (type === "movie" ? currItem.title : currItem.name)
@@ -123,6 +133,7 @@ function callTMDB(type, searchParams, resultsArray, apiResponse, userID, callbac
                         name: name,
                         plot: currItem.overview,
                         date: date,
+
                         image: "https://image.tmdb.org/t/p/original" + currItem.poster_path
                     }
                     resultsArray.push(newMovie);
@@ -130,7 +141,8 @@ function callTMDB(type, searchParams, resultsArray, apiResponse, userID, callbac
                     i--;
                 }
             }
-            callback(searchParams, resultsArray, apiResponse, userID);
+            var newIterator = iterator + 1;
+            callback(searchParams, resultsArray, newIterator, apiResponse, userID);
         }
     })
 }
