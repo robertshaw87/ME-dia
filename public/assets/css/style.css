@@ -25,10 +25,21 @@ a:hover {
 .btn {
     background-color: #26bc82;
     color: #fff;
+    border: 0px;
 }
 
 .btn:hover {
     background-color: #cec591;
+    color: #fff;
+    border: 0px;
+}
+
+#signup-btn {
+    background-color: #199261;
+}
+
+#signup-btn:hover {
+    background-color: #5f5e6b;    
 }
 
 .main-logo {
