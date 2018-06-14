@@ -136,7 +136,7 @@ $(document).ready(function() {
                 console.log(res);
             })
         }
-        location.reload();
+        window.location.replace("/recommendations");
 
     });
 
