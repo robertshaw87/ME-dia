@@ -60,6 +60,33 @@ $(document).ready(function() {
         }
     });
 
+    var owlBig = $('.owl-carousel-reviews');
+    owlBig.owlCarousel({
+        autoplay: true,
+        autoplayTimeout: 10000,
+        autoplayHoverPause: true,
+        center: true,
+        loop: true,
+        dotsEach: true,
+        margin: 20,
+        autoHeight: true,
+        responsive: {
+            0: {
+                items: 1
+            },
+            600: {
+                items: 1
+            },
+            960: {
+                items: 2
+            },
+            1200: {
+                items: 2
+            }
+        }
+    });
+
+
     var genres = ["Action", "Adventure", "Animation", "Comedy", "Crime", "Documentary", "Drama", "Family", "Fantasy", "History", "Horror", "Music", "Mystery", "Romance", "Science Fiction", "Thriller", "War", "Western"]
 
     for (i = 0; i < genres.length; i++) {
@@ -167,8 +194,10 @@ $(document).ready(function() {
                 </div>
                 <div class="col-12 col-md-5">
                     <h1 class="text-left">${$(this).data("name")}</h1>
-                    <h4 class="text-left">Date: ${$(this).data("date")}</h4>
-                    <p><h4>Plot:</h4> ${$(this).data("plot")}</p>
+                    <h4 class="text-left">Released: <span class="font-italic light">${$(this).data("date")}</span></h4>
+                    <h4 class="text-left">Media Type: <span class="font-italic light">${$(this).data("type")}</span></h4>
+                    <h4 class="text-left">Genre: <span class="font-italic light">${$(this).data("genre")}</span></h4>
+                    <p>${$(this).data("plot")}</p>
                 </div>
             </div>`)
     })

@@ -3,7 +3,7 @@
 	<div class = "row justify-content-center text-center my-4">
 		<div class="col-12 col-md-10">
 		<h1>Hello {{userName}}!</h1>
-		<h3>Here are some recommendations based on your history...</h3>
+		<h3>Here are some recommendations based on your current history...</h3>
 		<h6 class="text-muted">Click on a poster to view more information about the movie or tv show!</h6>
 
 		<a href="/addmedia" class="user-links">Add to My History</a>
@@ -12,7 +12,7 @@
 
 		<div class="owl-carousel owl-carousel-movies owl-theme text-center">
 			{{#each recommendations}}
-			<div><a href="#select-rec"><img src="{{image}}" class="recommended-media" data-img="{{image}} "data-plot="{{plot}}" data-name="{{name}}" data-date="{{date}}"></a></div>	
+			<div><a href="#select-rec"><img src="{{image}}" class="recommended-media" data-img="{{image}} "data-plot="{{plot}}" data-name="{{name}}" data-date="{{date}}" data-genre="{{genre}}" data-type="{{type}}"></a></div>	
 			{{/each}}
 		</div>
 
