@@ -40,6 +40,13 @@ router.get("/addmedia", function (req, res) {
     res.redirect("/login")
 })
 
+router.get("/newuseraddmedia", function (req, res) {
+    if (req.user){
+        res.render("newuserForm", {loggedIn: !(!req.user)});
+    } else
+    res.redirect("/login")
+})
+
 //create/post the user history in to history table
 router.post("/api/users/history", function (req, res) {
     if (req.user){
@@ -62,7 +69,6 @@ router.put("/api/users/interests", function (req, res) {
 
         var interests = req.body;
         var userid = req.user.id;
-        console.log(interests.genre);
         db.Interests.update({ counts: db.sequelize.literal('counts + 1') }, {
             where: {
                 UserId: userid,
@@ -76,6 +82,9 @@ router.put("/api/users/interests", function (req, res) {
     res.redirect("/login")
 });
 
+//=================================
+//Login Routes
+//=================================
 
 router.post("/api/login", passport.authenticate("local"), function (req, res) {
 
@@ -105,7 +114,7 @@ router.post("/api/newuser", passport.authenticate("local"), function (req, res) 
                 count: 0            
             })
         })
-        res.json("/addmedia");
+        res.json("/newuseraddmedia");
     } else
     res.redirect("/login")
 });
@@ -234,7 +243,7 @@ function callTMDB(type, searchParams, resultsArray, iterator, apiResponse, userI
 // View History Routes
 //============================
 
-
+//           :(
 
 //----------------------------
 
