@@ -41,7 +41,7 @@ var routes = require("./controllers/media_controller.js");
 app.use(routes);
 
 // set the server to start listening to our port
-db.sequelize.sync({ force: true }).then(function() {
+db.sequelize.sync({ force: false }).then(function() {
     app.listen(PORT, function() {
       console.log("App listening on PORT " + PORT);
     });
