@@ -17,14 +17,14 @@ const numRec = 3;
 
 router.get("/", function (req, res) {
     
-    res.render("index");
+    res.render("index", {loggedIn: !(!req.user)});
 });
 
 router.get("/login", function (req, res) {
     if (req.user) {
-        res.render("recommendations")
+        res.render("recommendations", {loggedIn: !(!req.user)})
     } else {
-        res.render("login");
+        res.render("login", {loggedIn: !(!req.user)});
     }
 });
 
@@ -35,7 +35,7 @@ router.get("/login", function (req, res) {
 //get info from the form
 router.get("/addmedia", function (req, res) {
     if (req.user){
-        res.render("userForm");
+        res.render("userForm", {loggedIn: !(!req.user)});
     } else
     res.redirect("/login")
 })
@@ -175,7 +175,8 @@ function finishRequest(searchParams, resultsArray, res, userID) {
         res.render("recommendations", {
             recommendations: resultsArray,
             userID: data.name,
-            userName: data[0].name
+            userName: data[0].name,
+            loggedIn: true
         });
     });
 }
