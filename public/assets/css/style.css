@@ -3,8 +3,6 @@ body {
     font-family: 'Roboto', sans-serif;
     background-color: #343434;
     color: #fff;
-    overflow-x: hidden;
-
 }
 
 h1 {
@@ -109,11 +107,11 @@ a:hover {
 
 .green{
     width: 100%;
-    background-color: #3d4c46;
+    background: linear-gradient(#26bc82, #343434);
     height: 100%;
     padding: 20px;
     margin-left: 0px;
-    margin-rgiht: 0px;
+    margin-right: 0px;
 }
 
 .user-form {
@@ -157,7 +155,7 @@ a:hover {
     align-items:center;
     font-size: 12px;
     background-color: #1e1e1e;
-    padding: 20px;
+    height: 100px;
     margin: 0px;
 }
 
