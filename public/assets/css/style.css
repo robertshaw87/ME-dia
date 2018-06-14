@@ -3,6 +3,7 @@ body {
     font-family: 'Roboto', sans-serif;
     background-color: #343434;
     color: #fff;
+    overflow-x: hidden;
 
 }
 
@@ -142,6 +143,19 @@ a:hover {
 .poster {
     height: 400px;
 }
+
+.footer {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size: 12px;
+    background-color: #1e1e1e;
+    padding: 20px;
+    margin: 0px;
+}
+
+
+
 
 .owl-theme .owl-dots .owl-dot span {
     background: #2bbc82;
