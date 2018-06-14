@@ -47,10 +47,6 @@ a:hover {
     text-decoration: none;
 }
 
-.text-muted {
-    color: #e04040!important;
-}
-
 .btn {
     background-color: #26bc82;
     color: #fff;
@@ -167,24 +163,24 @@ a:hover {
 
 @media(max-width:415px) {
     .main-logo {
-        width: 200px;
-        height: 200px;
-        margin-top: -100px;
-        /* Half the height */
-        margin-left: -100px;
+        display: none;
     }
     .main-jumbotron {
+        display: none;
+}
+    .break {
     width: 100%;
-    background: url(../imgs/test-background.png) no-repeat center center;
+    background: url(../imgs/break.png) no-repeat center top;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    height: 80vh;
+    height: 30vh;
     display: flex;
     align-items: flex-end;
-    margin: 0px;
+    margin: 0px;    
 }
+
 }
 
 .input {
