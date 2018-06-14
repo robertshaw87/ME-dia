@@ -17,7 +17,7 @@ const numRec = 3;
 
 router.get("/", function (req, res) {
     
-    res.render("index", {loggedIn: !(!req.user)});
+    res.render("index", {loggedIn: (req.user != undefined)});
 });
 
 router.get("/login", function (req, res) {
@@ -123,10 +123,11 @@ router.post("/api/newuser", passport.authenticate("local"), function (req, res) 
 // Route for logging user out
 router.get("/logout", function (req, res) {
     if (req.user){
-
-        req.logout();
-        res.redirect("/");
-
+        req.session.destroy(function (err) {
+            res.clearCookie('connect.sid')
+            req.logout();
+            res.redirect("/");
+        })
     } else
     res.redirect("/login")
 });
@@ -139,22 +140,18 @@ router.get("/logout", function (req, res) {
 
 router.get("/recommendations", function (req, res) {
     if (req.user){
-
         db.Interests.findAll({
             where: { "UserId": req.user.id },
             order: [
                 ["counts", "DESC"]
             ]
         }).then(function (data) {
-
             var searchParams = [];
             for (var i = 0; i < numGenres && i < data.length; i++) {
                 searchParams[i] = data[i].genre;
             }
             recommendMovie(searchParams, [], 0, res, req.user.id)
-
         });
-    
     } else
         res.redirect("/login")
 });
