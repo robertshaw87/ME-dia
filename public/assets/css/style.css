@@ -71,6 +71,15 @@ a:hover {
     font-size: 1.5em;
 }
 
+.genres-form{
+    width: 150px;
+}
+
+.genre-choices{
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .down-arrow {
     display: flex;
     margin-left: auto;
