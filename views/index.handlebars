@@ -1,4 +1,4 @@
-{{> navbar}}
+{{> navbar status=loggedIn}}
 
 <div class="jumbotron main-jumbotron align-content-center">
 	<img class="main-logo" src="/assets/imgs/logo-light.svg">
@@ -10,16 +10,32 @@
 <div class = "container">
 	<div class = "row justify-content-center">
 		<div class="col-12 col-md-10">
-		<h1 class="text-center">Welcome to ME.dia</h1>
-		<h2 class="text-center">How are you today?</h2>
+		<h1 class="text-center">Finding what to watch has never been so easy</h1>
 		</div>
 	</div>
-	<div class = "row justify-content-center">
-		<div class="col-12 col-md-10">
-		<h1 class="text-center">AT MEDIA U CAN DO DIS</h1>
-		<h2 class="text-center" id="test-section">AND WE'LL GIVE U DIS WHEN U TELL US DAT</h2>
+	<div class = "row justify-content-center my-5">
+		<div class="col-12 col-md-4">
+		<h1 class="text-center"><i class="fas fa-film fa-2x" style="color:#26bc82"></i></h1><br>
+		<h5 class="text-center" id="test-section">Find TV &amp; movie recommendations based on the stuff that you already enjoy</h5>
+		</div>
+		<div class="col-12 col-md-4">
+		<h1 class="text-center"><i class="fas fa-align-left fa-2x" style="color:#cec591"></i></h1><br>
+		<h5 class="text-center" id="test-section">Add your watch history and get uniquly tailored recommendations, find new stuff to watch!</h5>
+		</div>
+		<div class="col-12 col-md-4">
+		<h1 class="text-center"><i class="fas fa-random fa-2x" style="color: #c8c7d4"></i></h1><br>
+		<h5 class="text-center" id="test-section">Recommendations constantly change everytime you visit the app!</h5>
 		</div>
 	</div>	
+	<div class="row justify-content-center">
+	<h1 class="font-italic">Putting you and your entertainment, closer together.</h1>
+	</div>
+</div>
+
+<div class="row justify-content-center break my-5">
+</div>
+
+<div class= "container">
 	<div class = "row justify-content-center">
 		<div clas="col-12 col-md-10">
 			{{> placeholders/dummy-txt}}
