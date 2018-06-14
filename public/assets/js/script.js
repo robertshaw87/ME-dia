@@ -83,6 +83,18 @@ $(document).ready(function() {
 
         })
 
+        $("#newusersubmit").on("click", function(event) {
+            event.preventDefault();
+            var history = {
+                name: $("#media-name").val().trim(),
+                type: $("#media-type").val().trim()
+            }
+            var genreSelected = [];
+            $(".form-check-input:checked").each(function() {
+                genreSelected.push($(this).val())
+    
+            })
+
 
         $.post("/api/users/history", history, function(data) {
             //console.log(data);

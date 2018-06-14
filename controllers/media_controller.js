@@ -40,6 +40,13 @@ router.get("/addmedia", function (req, res) {
     res.redirect("/login")
 })
 
+router.get("/newuseraddmedia", function (req, res) {
+    if (req.user){
+        res.render("newuserForm");
+    } else
+    res.redirect("/login")
+})
+
 //create/post the user history in to history table
 router.post("/api/users/history", function (req, res) {
     if (req.user){
@@ -105,7 +112,7 @@ router.post("/api/newuser", passport.authenticate("local"), function (req, res) 
                 count: 0            
             })
         })
-        res.json("/addmedia");
+        res.json("/newuseraddmedia");
     } else
     res.redirect("/login")
 });
