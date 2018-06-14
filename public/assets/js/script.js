@@ -129,6 +129,7 @@ $(document).ready(function() {
             window.location.replace(data);
         }).catch(function(err){
             console.log(err)
+            $("#loginHelp").text("That username password combination does not exist. Please try again.")
         })
     })
     $(document).on("click", "#signup-btn", function(event){
@@ -146,7 +147,7 @@ $(document).ready(function() {
             window.location.replace(data);
         }).catch(function(err){
             console.log(err)
-            $("#usernameHelp").text("That username is taken. Please choose a new username")
+            $("#loginHelp").text("That username is taken. Please choose a new username")
         })
     })
     
