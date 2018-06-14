@@ -17,7 +17,7 @@ const numRec = 3;
 
 router.get("/", function (req, res) {
     
-    res.render("index", {loggedIn: !(!req.user)});
+    res.render("index", {loggedIn: (req.user != undefined)});
 });
 
 router.get("/login", function (req, res) {
@@ -124,6 +124,7 @@ router.post("/api/newuser", passport.authenticate("local"), function (req, res) 
 router.get("/logout", function (req, res) {
     if (req.user){
         req.session.destroy(function (err) {
+            res.clearCookie('connect.sid')
             req.logout();
             res.redirect("/");
         })

@@ -159,7 +159,9 @@ a:hover {
     margin: 0px;
 }
 
-
+#loginHelp {
+    color: red !important;
+}
 
 
 .owl-theme .owl-dots .owl-dot span {
