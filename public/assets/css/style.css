@@ -93,9 +93,6 @@ a:hover {
     margin: 0px;
 }
 
-.characters {
-    height: 500px;
-}
 
 .break {
     width: 100%;
@@ -144,6 +141,16 @@ a:hover {
     height: 400px;
 }
 
+.review{
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.light{
+    font-weight: 300;
+}
+
 .footer {
     display:flex;
     justify-content:center;
@@ -172,6 +179,30 @@ a:hover {
         margin-top: -200px;
         /* Half the height */
         margin-left: -200px;
+    }
+    .main-jumbotron {
+    width: 100%;
+    background: url(../imgs/test-background.png) no-repeat center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    align-items: flex-end;
+    margin: 0px;
+    }
+    .break {
+    width: 100%;
+    background: url(../imgs/break.png) no-repeat center top;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    height: 90vh;
+    display: flex;
+    align-items: flex-end;
+    margin: 0px;    
     }
 }
 
