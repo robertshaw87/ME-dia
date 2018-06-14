@@ -7,28 +7,29 @@
 			<img class="img-fluid" src="/assets/imgs/login-characters.png">
 		</div>
 		<div class="col-12 col-md-6">
-			<h1>Entertainment recommndations tailored to everything you watch.</h1>
-			<br>
-			<form>
-				<div class="form-group">
-					<label for="username">
-						<i class="fas fa-user"></i> Username</label>
-					<input type="text" class="form-control" id="username" aria-describedby="emailHelp" placeholder="Enter your username" onfocus="this.placeholder = ''"
-					 onblur="this.placeholder = 'Enter your username'">
-					<small id="usernameHelp" class="form-text text-muted"></small>
-				</div>
-				<div class="form-group">
-					<label for="password">
-						<i class="fas fa-key"></i> Password</label>
-					<input type="password" class="form-control" id="password" placeholder="Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'">
-				</div>
-				<div class="text-right">
-					<button id="login-btn" class="btn">
-						<i class="fas fa-sign-in-alt"></i> Login</button>
-					<button id="signup-btn" class="btn">
-						<i class="fas fa-user-plus"></i> Sign Up</button>
-				</div>
-			</form>
+			<h1>Entertainment recommendations tailored for everything you watch.</h1>
+
+        <div class="input input--isao">
+        <input class="input__field input__field--isao" type="text" id="username" placeholder="Enter your username" onfocus="this.placeholder = ''"onblur="this.placeholder = 'Enter your username'"/>
+        <label class="input__label input__label--isao" data-content="username">
+        <span class="input__label-content input__label-content--isao"><i class="fas fa-user"></i> Username</span>
+        </label>
+        </div>
+
+        <div class="input input--isao">
+        <input class="input__field input__field--isao" type="password" id="password" placeholder="Enter your password" onfocus="this.placeholder = ''"onblur="this.placeholder = 'Enter your password'"/>
+        <label class="input__label input__label--isao" data-content="password">
+        <span class="input__label-content input__label-content--isao"><i class="fas fa-key"></i>  Password</span>
+        </label>
+        </div>
+
+		<div class="text-right">
+		<button id="login-btn" class="btn">
+			<i class="fas fa-sign-in-alt"></i> Login</button>
+			<button id="signup-btn" class="btn">
+			<i class="fas fa-user-plus"></i> Sign Up</button>
+		</div>
+		<small id="usernameHelp" class="form-text text-muted"></small>
 		</div>
 	</div>
 </div>
