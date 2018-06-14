@@ -63,6 +63,13 @@ $(document).ready(function() {
     var genres = ["Action", "Adventure", "Animation", "Comedy", "Crime", "Documentary", "Drama", "Family", "Fantasy", "History", "Horror", "Music", "Mystery", "Romance", "Science Fiction", "Thriller", "War", "Western"]
 
     for (i = 0; i < genres.length; i++) {
+        $(".genre-choices").append(`<div class="form-check form-check-inline genres-form">
+        <input class="form-check-input" type="checkbox" id="genre ${i + 1}" value="${genres[i]}">
+        <label class="form-check-label" for="inlineCheckbox1">${genres[i]}</label>
+    </div>`)
+    }
+
+    for (i = 0; i < genres.length; i++) {
         $(".genre1-choices").append(`<div class="form-check form-check-inline genres-form">
         <input class="form1-check-input" type="checkbox" id="genre ${i + 1}" value="${genres[i]}">
         <label class="form-check-label" for="inlineCheckbox1">${genres[i]}</label>
