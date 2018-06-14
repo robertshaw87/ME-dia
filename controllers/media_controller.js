@@ -99,6 +99,7 @@ router.post("/api/signup", function (req, res) {
         res.redirect(307, "/api/newuser");
     }).catch(function (err) {
         console.log(err);
+        res.status(400)
         res.json(err);
     });
 });
