@@ -238,5 +238,7 @@ $(document).ready(function() {
         })
     })
     
-
+    $(document).on("click", "#userLogout", function(event) {
+        document.cookie = "connect.sid=;expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+    })
 });

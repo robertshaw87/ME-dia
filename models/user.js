@@ -11,7 +11,6 @@ module.exports = function (sequelize, DataTypes) {
                 len: [1]
             }
         },
-
         password: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -19,7 +18,6 @@ module.exports = function (sequelize, DataTypes) {
                 len: [1]
             }
         }
-
     });
 
     //This will check if an unhashed password entered by the 
@@ -33,10 +31,8 @@ module.exports = function (sequelize, DataTypes) {
     User.hook("beforeCreate", function (user) {
         user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null);
     });
-//     return User;
-// };
+
 User.associate = function (models) {
-    // Associating User with username/pass
     // When a User is deleted, also delete any associated info
     User.hasMany(models.Interests, {
         onDelete: "cascade"

@@ -7,7 +7,6 @@ module.exports = function (sequelize, DataTypes) {
                 len: [1]
             }
         },
-
         counts: {
             type: DataTypes.INTEGER,
             allowNull: false,
@@ -16,7 +15,6 @@ module.exports = function (sequelize, DataTypes) {
                 min: 0
             }
         },
-    
     });
 
     Interests.associate = function(models) {
