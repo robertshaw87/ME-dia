@@ -67,28 +67,20 @@ $(document).ready(function() {
         <input class="form-check-input" type="checkbox" id="genre ${i + 1}" value="${genres[i]}">
         <label class="form-check-label" for="inlineCheckbox1">${genres[i]}</label>
     </div>`)
-    }
-
-    for (i = 0; i < genres.length; i++) {
         $(".genre1-choices").append(`<div class="form-check form-check-inline genres-form">
-        <input class="form1-check-input" type="checkbox" id="genre ${i + 1}" value="${genres[i]}">
-        <label class="form-check-label" for="inlineCheckbox1">${genres[i]}</label>
-    </div>`)
-    }
-
-    for (i = 0; i < genres.length; i++) {
+            <input class="form1-check-input" type="checkbox" id="genre ${i + 1}" value="${genres[i]}">
+            <label class="form-check-label" for="inlineCheckbox1">${genres[i]}</label>
+        </div>`)
         $(".genre2-choices").append(`<div class="form-check form-check-inline genres-form">
         <input class="form2-check-input" type="checkbox" id="genre ${i + 1}" value="${genres[i]}">
         <label class="form-check-label" for="inlineCheckbox1">${genres[i]}</label>
     </div>`)
-    }
-
-    for (i = 0; i < genres.length; i++) {
-        $(".genre3-choices").append(`<div class="form-check form-check-inline genres-form">
+    $(".genre3-choices").append(`<div class="form-check form-check-inline genres-form">
         <input class="form3-check-input" type="checkbox" id="genre ${i + 1}" value="${genres[i]}">
         <label class="form-check-label" for="inlineCheckbox1">${genres[i]}</label>
     </div>`)
     }
+
     $("#submit").on("click", function(event) {
         event.preventDefault();
         var history = {
@@ -123,85 +115,36 @@ $(document).ready(function() {
 
     $("#newusersubmit").on("click", function(event) {
         event.preventDefault();
-        var history1 = {
+        var history = [];
+        var genreSelected = [];
+
+        history.push({
             name: $("#media1-name").val().trim(),
             type: $("#media1-type").val().trim()
-        }
-        var genreSelected = [];
+        })
         $(".form1-check-input:checked").each(function() {
             genreSelected.push($(this).val())
-
         })
 
-        $.post("/api/users/history", history1, function(data) {
-            //console.log(data);
-        })
-        // console.log(genreSelected);
-        // console.log(history);
-        for (i = 0; i < genreSelected.length; i++) {
-            var genre = {
-                genre: genreSelected[i]
-            }
-            $.ajax("/api/users/interests", {
-                type: "PUT",
-                data: genre
-            }).then(function(res) {
-                console.log(res);
-            })
-        }
-        location.reload();
-        
-    })
-
-    $("#newusersubmit").on("click", function(event) {
-        event.preventDefault();
-        var history2 = {
+        history.push({
             name: $("#media2-name").val().trim(),
             type: $("#media2-type").val().trim()
-        }
-        var genreSelected = [];
+        })
         $(".form2-check-input:checked").each(function() {
             genreSelected.push($(this).val())
-    
         })
 
-        $.post("/api/users/history", history2, function(data) {
-            //console.log(data);
-        })
-        // console.log(genreSelected);
-        // console.log(history);
-        for (i = 0; i < genreSelected.length; i++) {
-            var genre = {
-                genre: genreSelected[i]
-            }
-            $.ajax("/api/users/interests", {
-                type: "PUT",
-                data: genre
-            }).then(function(res) {
-                console.log(res);
-            })
-        }
-        location.reload();
-        
-    })
-
-    $("#newusersubmit").on("click", function(event) {
-        event.preventDefault();
-        var history3 = {
+        history.push({
             name: $("#media3-name").val().trim(),
             type: $("#media3-type").val().trim()
-        }
-        var genreSelected = [];
+        })
         $(".form3-check-input:checked").each(function() {
             genreSelected.push($(this).val())
-    
         })
-
-        $.post("/api/users/history", history3, function(data) {
-            //console.log(data);
-        })
-        // console.log(genreSelected);
-        // console.log(history);
+        for (var i = 0; i < history.length; i++){
+            $.post("/api/users/history", history[i], function(data) {
+            })
+        }
         for (i = 0; i < genreSelected.length; i++) {
             var genre = {
                 genre: genreSelected[i]
@@ -210,10 +153,9 @@ $(document).ready(function() {
                 type: "PUT",
                 data: genre
             }).then(function(res) {
-                console.log(res);
             })
         }
-        location.reload();
+        window.location.replace("/recommendations");
         
     })
 

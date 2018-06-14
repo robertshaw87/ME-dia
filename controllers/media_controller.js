@@ -42,7 +42,7 @@ router.get("/addmedia", function (req, res) {
 
 router.get("/newuseraddmedia", function (req, res) {
     if (req.user){
-        res.render("newuserForm");
+        res.render("newuserForm", {loggedIn: !(!req.user)});
     } else
     res.redirect("/login")
 })
@@ -69,7 +69,6 @@ router.put("/api/users/interests", function (req, res) {
 
         var interests = req.body;
         var userid = req.user.id;
-        console.log(interests.genre);
         db.Interests.update({ counts: db.sequelize.literal('counts + 1') }, {
             where: {
                 UserId: userid,
@@ -83,6 +82,9 @@ router.put("/api/users/interests", function (req, res) {
     res.redirect("/login")
 });
 
+//=================================
+//Login Routes
+//=================================
 
 router.post("/api/login", passport.authenticate("local"), function (req, res) {
 
@@ -241,7 +243,7 @@ function callTMDB(type, searchParams, resultsArray, iterator, apiResponse, userI
 // View History Routes
 //============================
 
-
+//           :(
 
 //----------------------------
 
