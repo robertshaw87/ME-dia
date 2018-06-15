@@ -15,10 +15,22 @@ It's easy to go on Netflix and view your recommendations or view a currated play
 * [Handlebars](http://handlebarsjs.com/) - semantic templating
 
 ### NPM Packages
-* [Express](https://www.npmjs.com/package/express)
-* [Express-Handlebars](https://www.npmjs.com/package/express-handlebars)
-* [body-parser](https://www.npmjs.com/package/body-parser)
-* [mySQL](https://www.npmjs.com/package/mysql)
+* [sequelize](http://docs.sequelizejs.com/) - ORM for SQL database 
+* [Express](https://www.npmjs.com/package/express) - Server-side framework
+* [Express-Handlebars](https://www.npmjs.com/package/express-handlebars) - Semantic templates for HTML generation
+* [body-parser](https://www.npmjs.com/package/body-parser) - Request parsing middleware
+* [mySQL2](https://www.npmjs.com/package/mysql2) - Make server-side SQL queries 
+* [passport](http://www.passportjs.org/) - Authenticate requests 
+passport-local - Local login authentication
+mysql2 - Make server-side SQL queries 
+express - Server-side framework
+express-session - Middleware for session data
+express-handlebars - Semantic templates for HTML generation
+body-parser - Request parsing middleware
+bcrypt-nodejs - Encrypt user password
+cookie parser -  Middleware for cookies
+dotenv - Keep API keys hidden
+request - Make server-side API calls 
 
 ### APIs
 * [The MovieDB](https://www.themoviedb.org/documentation/api)
