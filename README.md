@@ -13,24 +13,21 @@ It's easy to go on Netflix and view your recommendations or view a currated play
 * [Node.js](https://nodejs.org/en/) - javascript runtime
 * [Express.js](https://expressjs.com/) - routing framework
 * [Handlebars](http://handlebarsjs.com/) - semantic templating
+* [Owl Carousel 2](https://owlcarousel2.github.io/OwlCarousel2/) - better carousel
 
 ### NPM Packages
-* [sequelize](http://docs.sequelizejs.com/) - ORM for SQL database 
+* [sequelize](http://docs.sequelizejs.com/) - ORM for SQL database
 * [Express](https://www.npmjs.com/package/express) - Server-side framework
 * [Express-Handlebars](https://www.npmjs.com/package/express-handlebars) - Semantic templates for HTML generation
+* [Express-session](https://www.npmjs.com/package/express-session) - Middleware for session data
 * [body-parser](https://www.npmjs.com/package/body-parser) - Request parsing middleware
 * [mySQL2](https://www.npmjs.com/package/mysql2) - Make server-side SQL queries 
 * [passport](http://www.passportjs.org/) - Authenticate requests 
-passport-local - Local login authentication
-mysql2 - Make server-side SQL queries 
-express - Server-side framework
-express-session - Middleware for session data
-express-handlebars - Semantic templates for HTML generation
-body-parser - Request parsing middleware
-bcrypt-nodejs - Encrypt user password
-cookie parser -  Middleware for cookies
-dotenv - Keep API keys hidden
-request - Make server-side API calls 
+* [passport-local](https://www.npmjs.com/package/passport-local) - Local login authentication
+* [bcrypt-nodejs](https://www.npmjs.com/package/bcrypt-nodejs) - Encrypt user password
+* [cookie-parser](https://www.npmjs.com/package/cookie-parser) - Middleware for cookies
+* [dotenv](https://www.npmjs.com/package/dotenv) - Keep API keys hidden
+* [request](https://www.npmjs.com/package/request) - Make server-side API calls 
 
 ### APIs
 * [The MovieDB](https://www.themoviedb.org/documentation/api)
