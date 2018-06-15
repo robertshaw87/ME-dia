@@ -34,11 +34,11 @@ It's easy to go on Netflix and view your recommendations or view a currated play
 * [request](https://www.npmjs.com/package/request) - Make server-side API calls 
 
 ### APIs
-* [The MovieDB](https://www.themoviedb.org/documentation/api)
+* [The MovieDB](https://www.themoviedb.org/documentation/api) - Movie and TV Show recommendations
 
 ## Authors :key:
 * **Sara Khosravinasr** [saranasr83](https://github.com/saranasr83)
-* **Rober Shaw** - [robertshaw87](https://github.com/robertshaw87)
+* **Robert Shaw** - [robertshaw87](https://github.com/robertshaw87)
 * **Jimmy Tu** - [jimmytutron](https://github.com/jimmytutron)
 
 
@@ -76,7 +76,7 @@ With our models defined, we are able to interact with our database through the `
 
 Creating the login authorization logic was fairly challenging. It was a new technology that required a firm grasp on Front-end and Back-end interactions through middle-ware. When a new user signs up, the user model actually takes care of most of the authentication by making sure there isn’t already a user with the same name. It's when a user tries to login where the logic becomes more interesting. Our middleware tries to authenticate the login by checking to make sure that the user exists and then by comparing the encrypted passwords. 
 
-We used the `bcrypt` node package in order to add a hook to the creation of a new `user` to encrypt the password before storing it. This way we don't have unencrypted passwords in our database at anytime. `bcrypt` also has the very helpful `compareSync` method that allows us to check whether the user provided password matches our records.
+We used the `bcrypt` node package in order to add a hook to the creation of a new `user` to encrypt the password before storing it. This way we don't have unencrypted passwords in our database at anytime. `bcrypt` also has the very helpful `compareSync` method that allows us to check whether the user provided password matches our records. Once the user logs in, their information becomes available in every request under the key of `user`.
 
 ## User Recommendations
 
@@ -97,7 +97,15 @@ Storing information we want to return to the user under a global variable would 
   <img src="public/assets/imgs/readme-handlebars.gif" alt="Handlebars" width="500">
 </h1>
 
+We decided to use the `Handlebars` rendering engine so we can more easily provide data from the server to the html. `Handlebars` features power tools such as conditionals and array iteration within the html itself. We were able to decide which links the user saw on the navbar just by providing and handling a boolean indicating whether the user was signed in. `Handlebars` also allowed us to iterate through an array of media objects from the recommendations API call without resorting to multiple lines of javascript on the client side.
 
+## Planned Features
+
+<h1 align="center">
+  <img src="public/assets/imgs/readme-planned-features.png" alt="Planned Features" width="500">
+</h1>
+
+Of course we haven't yet implemented all the ideas we envisioned. We hope to find the opportunity to work together in the future to expand the scope of this app.
 
 ## Acknowledgments :pray:
 A huuuuge MEGA bigly thank you to our instructor, Jerome, and the TAs, Amber, Ricky, and Sasha!!  :grimacing:
