@@ -32,11 +32,35 @@ It's easy to go on Netflix and view your recommendations or view a currated play
 ### APIs
 * [The MovieDB](https://www.themoviedb.org/documentation/api)
 
-## Author :key:
+## Authors :key:
 * **Sara Khosravinasr** [saranasr83](https://github.com/saranasr83)
 * **Rober Shaw** - [robertshaw87](https://github.com/robertshaw87)
 * **Jimmy Tu** - [jimmytutron](https://github.com/jimmytutron)
 
+
+## Routes
+
+<h1 align="center">
+  <img src="public/assets/imgs/readme-routes.png" alt="Routes" width="500">
+</h1>
+
+Because this was a full stack app, we had to create our own routes for our client to interact with the server. Everything from the `get` methods to serve up html to the `post` and `put` methods to interact with our database. So many interconnected parts meant that the Front-end and the Back-end developers had to maintain good communication to produce a coherent product.
+
+## Models
+
+<h1 align="center">
+  <img src="public/assets/imgs/readme-models.png" alt="Models" width="500">
+  <img src="public/assets/imgs/readme-models-code.gif" alt="Models Code" width="500">
+</h1>
+
+We chose to keep the models for the app simple for now: each `user` has many `histories` and many `interests`. By splitting the view history and the user interests, we could more easily integrate addition types of media into our app by simply expanding the types available in the history table. In addition, we can still eventually choose to store more information about each movie/show/book/song that the user has seen without overcomplicating our interactions with the rest of the database.
+
+## CRUD Database
+
+<h1 align="center">
+  <img src="public/assets/imgs/readme-C-U.png" alt="Models" width="500">
+  <img src="public/assets/imgs/readme-C-U.png" alt="Models" width="500">
+</h1>
 
 ## Acknowledgments :pray:
 A huuuuge MEGA bigly thank you to our instructor, Jerome, and the TAs, Amber, Ricky, and Sasha!!  :grimacing:
