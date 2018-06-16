@@ -7,9 +7,8 @@ ME.dia is an app that generates cross platform media and entertainment recommend
 It's easy to go on Netflix and view your recommendations or view a currated playlist on Spotify, but with ME.dia you can get the both of best worlds. 
 
 <h1 align="center">
-  <img src="public/assets/imgs/readme-webpage.gif" alt="Me.dia Webpage" width="500">
-<h1>
-
+  <img src="public/assets/imgs/readme-webpage.gif" alt="Me.dia Webpage" width="800">
+</h1>
 <h5 align="center">Launch the application on (https://media-2018.herokuapp.com/)</h5>
 
 ## Built With :tv:
