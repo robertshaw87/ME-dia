@@ -1,6 +1,7 @@
 <h1 align="center">
-  <img src="public/assets/imgs/logo.svg" alt="Me.dia" width="500">
+  <a href="https://media-2018.herokuapp.com/"><img src="public/assets/imgs/logo.svg" alt="Me.dia" width="500"></a>
 </h1>
+<h5 align="center">Launch the application on (https://media-2018.herokuapp.com/)</h5>
 
 ME.dia is an app that generates cross platform media and entertainment recommendations. Just watched a good movie? But want something to read or watch on tv instead? We can do that! Tell us what you've watched or read and we'll give you more related media to enjoy. 
 
@@ -9,7 +10,7 @@ It's easy to go on Netflix and view your recommendations or view a currated play
 <h1 align="center">
   <img src="public/assets/imgs/readme-webpage.gif" alt="Me.dia Webpage" width="800">
 </h1>
-<h5 align="center">Launch the application on (https://media-2018.herokuapp.com/)</h5>
+
 
 ## Built With :tv:
 * HTML5 & CSS3
